@@ -1,5 +1,20 @@
 # Crypto CTFs Tricks
 
+{% hint style="success" %}
+Learn & practice AWS Hacking:<img src="/.gitbook/assets/arte.png" alt="" data-size="line">[**HackTricks Training AWS Red Team Expert (ARTE)**](https://training.hacktricks.xyz/courses/arte)<img src="/.gitbook/assets/arte.png" alt="" data-size="line">\
+Learn & practice GCP Hacking: <img src="/.gitbook/assets/grte.png" alt="" data-size="line">[**HackTricks Training GCP Red Team Expert (GRTE)**<img src="/.gitbook/assets/grte.png" alt="" data-size="line">](https://training.hacktricks.xyz/courses/grte)
+
+<details>
+
+<summary>Support HackTricks</summary>
+
+* Check the [**subscription plans**](https://github.com/sponsors/carlospolop)!
+* **Join the** 💬 [**Discord group**](https://discord.gg/hRep4RUj7f) or the [**telegram group**](https://t.me/peass) or **follow** us on **Twitter** 🐦 [**@hacktricks\_live**](https://twitter.com/hacktricks\_live)**.**
+* **Share hacking tricks by submitting PRs to the** [**HackTricks**](https://github.com/carlospolop/hacktricks) and [**HackTricks Cloud**](https://github.com/carlospolop/hacktricks-cloud) github repos.
+
+</details>
+{% endhint %}
+
 ## Online Hashes DBs
 
 * _**Google it**_
@@ -19,6 +34,7 @@
 * [**https://github.com/Ciphey/Ciphey**](https://github.com/Ciphey/Ciphey)
 * [https://gchq.github.io/CyberChef/](https://gchq.github.io/CyberChef/) (Magic module)
 * [https://github.com/dhondta/python-codext](https://github.com/dhondta/python-codext)
+* [https://www.boxentriq.com/code-breaking](https://www.boxentriq.com/code-breaking)
 
 ## Encoders
 
@@ -58,7 +74,7 @@ Check all these bases with: [https://github.com/dhondta/python-codext](https://g
   * `D1QPRRB3C5S62RVFDHGG====`
 * **Base32 Extended Hexadecimal** \[_0-9A-V_]
   * `D1NMOOB3C5P62ORFDHGG====`
-* **Base45** \[_0-9A-Z $%*+-./:_]
+* **Base45** \[_0-9A-Z $%\*+-./:_]
   * `59DPVDGPCVKEUPCPVD`
 * **Base58 (bitcoin)** \[_1-9A-HJ-NP-Za-km-z_]
   * `2yJiRg5BF9gmsU6AC`
@@ -70,19 +86,19 @@ Check all these bases with: [https://github.com/dhondta/python-codext](https://g
   * `g2AextRZpBKRBzQ9`
 * **Base64** \[_A-Za-z0-9+/=_]
   * `aG9sYWNhcmFjb2xh`
-* **Base67** \[_A-Za-z0-9-_.!~_]
+* **Base67** \[_A-Za-z0-9-_.!\~\_]
   * `NI9JKX0cSUdqhr!p`
-* **Base85 (Ascii85)** \[_!\"#$%&'()*+,-./0-9:;<=>?@A-Z[\\]^\_`a-u_]
+* **Base85 (Ascii85)** \[_!"#$%&'()\*+,-./0-9:;<=>?@A-Z\[\\]^\_\`a-u_]
   * `BQ%]q@psCd@rH0l`
-* **Base85 (Adobe)** \[_!\"#$%&'()*+,-./0-9:;<=>?@A-Z[\\]^\_`a-u_]
+* **Base85 (Adobe)** \[_!"#$%&'()\*+,-./0-9:;<=>?@A-Z\[\\]^\_\`a-u_]
   * `<~BQ%]q@psCd@rH0l~>`
-* **Base85 (IPv6 or RFC1924)** \[_0-9A-Za-z!#$%&()*+-;<=>?@^_`{|}~_]
-  * `Xm4y`V_|Y(V{dF>`
-* **Base85 (xbtoa)** \[_!\"#$%&'()*+,-./0-9:;<=>?@A-Z[\\]^\_`a-u_]
+* **Base85 (IPv6 or RFC1924)** \[_0-9A-Za-z!#$%&()\*+-;<=>?@^_\`{|}\~\_]
+  * `Xm4y`V\_|Y(V{dF>\`
+* **Base85 (xbtoa)** \[_!"#$%&'()\*+,-./0-9:;<=>?@A-Z\[\\]^\_\`a-u_]
   * `xbtoa Begin\nBQ%]q@psCd@rH0l\nxbtoa End N 12 c E 1a S 4e6 R 6991d`
-* **Base85 (XML)** \[_0-9A-Za-y!#$()*+,-./:;=?@^`{|}~z\__]
+* **Base85 (XML)** \[_0-9A-Za-y!#$()\*+,-./:;=?@^\`{|}\~z\__]
   * `Xm4y|V{~Y+V}dF?`
-* **Base91** \[_A-Za-z0-9!#$%&()*+,./:;<=>?@[]^\_`{|}~"_]
+* **Base91** \[_A-Za-z0-9!#$%&()\*+,./:;<=>?@\[]^\_\`{|}\~"_]
   * `frDg[*jNN!7&BQM`
 * **Base100** \[]
   * `👟👦👣👘👚👘👩👘👚👦👣👘`
@@ -111,7 +127,7 @@ Check all these bases with: [https://github.com/dhondta/python-codext](https://g
 * **Citrix CTX1** \[]
   * `MNGIKCAHMOGLKPAKMMGJKNAINPHKLOBLNNHILCBHNOHLLPBK`
 
-[http://k4.cba.pl/dw/crypo/tools/eng_atom128c.html](http://k4.cba.pl/dw/crypo/tools/eng_atom128c.html) - 404 Dead: [https://web.archive.org/web/20190228181208/http://k4.cba.pl/dw/crypo/tools/eng_hackerize.html](https://web.archive.org/web/20190228181208/http://k4.cba.pl/dw/crypo/tools/eng_hackerize.html)
+[http://k4.cba.pl/dw/crypo/tools/eng\_atom128c.html](http://k4.cba.pl/dw/crypo/tools/eng\_atom128c.html) - 404 Dead: [https://web.archive.org/web/20190228181208/http://k4.cba.pl/dw/crypo/tools/eng\_hackerize.html](https://web.archive.org/web/20190228181208/http://k4.cba.pl/dw/crypo/tools/eng\_hackerize.html)
 
 ### HackerizeXS \[_╫Λ↻├☰┏_]
 
@@ -119,7 +135,7 @@ Check all these bases with: [https://github.com/dhondta/python-codext](https://g
 ╫☐↑Λ↻Λ┏Λ↻☐↑Λ
 ```
 
-* [http://k4.cba.pl/dw/crypo/tools/eng_hackerize.html](http://k4.cba.pl/dw/crypo/tools/eng_hackerize.html) - 404 Dead: [https://web.archive.org/web/20190228181208/http://k4.cba.pl/dw/crypo/tools/eng_hackerize.html](https://web.archive.org/web/20190228181208/http://k4.cba.pl/dw/crypo/tools/eng_hackerize.html)
+* [http://k4.cba.pl/dw/crypo/tools/eng\_hackerize.html](http://k4.cba.pl/dw/crypo/tools/eng\_hackerize.html) - 404 Dead: [https://web.archive.org/web/20190228181208/http://k4.cba.pl/dw/crypo/tools/eng\_hackerize.html](https://web.archive.org/web/20190228181208/http://k4.cba.pl/dw/crypo/tools/eng\_hackerize.html)
 
 ### Morse
 
@@ -127,7 +143,7 @@ Check all these bases with: [https://github.com/dhondta/python-codext](https://g
 .... --- .-.. -.-. .- .-. .- -.-. --- .-.. .-
 ```
 
-* [http://k4.cba.pl/dw/crypo/tools/eng_morse-encode.html](http://k4.cba.pl/dw/crypo/tools/eng_morse-encode.html) - 404 Dead: [https://gchq.github.io/CyberChef/](https://gchq.github.io/CyberChef/)
+* [http://k4.cba.pl/dw/crypo/tools/eng\_morse-encode.html](http://k4.cba.pl/dw/crypo/tools/eng\_morse-encode.html) - 404 Dead: [https://gchq.github.io/CyberChef/](https://gchq.github.io/CyberChef/)
 
 ### UUencoder
 
@@ -209,7 +225,7 @@ krodfdudfrod
 
 **Multitap** [replaces a letter](https://www.dcode.fr/word-letter-change) by repeated digits defined by the corresponding key code on a mobile [phone keypad](https://www.dcode.fr/phone-keypad-cipher) (This mode is used when writing SMS).\
 For example: 2=A, 22=B, 222=C, 3=D...\
-You can identify this code because you will see** several numbers repeated**.
+You can identify this code because you will see\*\* several numbers repeated\*\*.
 
 You can decode this code in: [https://www.dcode.fr/multitap-abc-cipher](https://www.dcode.fr/multitap-abc-cipher)
 
@@ -287,10 +303,25 @@ A secret is splitted in X parts and to recover it you need Y parts (_Y <=X_).
 ### OpenSSL brute-force
 
 * [https://github.com/glv2/bruteforce-salted-openssl](https://github.com/glv2/bruteforce-salted-openssl)
-* [https://github.com/carlospolop/easy_BFopensslCTF](https://github.com/carlospolop/easy_BFopensslCTF)
+* [https://github.com/carlospolop/easy\_BFopensslCTF](https://github.com/carlospolop/easy\_BFopensslCTF)
 
 ## Tools
 
 * [https://github.com/Ganapati/RsaCtfTool](https://github.com/Ganapati/RsaCtfTool)
 * [https://github.com/lockedbyte/cryptovenom](https://github.com/lockedbyte/cryptovenom)
 * [https://github.com/nccgroup/featherduster](https://github.com/nccgroup/featherduster)
+
+{% hint style="success" %}
+Learn & practice AWS Hacking:<img src="/.gitbook/assets/arte.png" alt="" data-size="line">[**HackTricks Training AWS Red Team Expert (ARTE)**](https://training.hacktricks.xyz/courses/arte)<img src="/.gitbook/assets/arte.png" alt="" data-size="line">\
+Learn & practice GCP Hacking: <img src="/.gitbook/assets/grte.png" alt="" data-size="line">[**HackTricks Training GCP Red Team Expert (GRTE)**<img src="/.gitbook/assets/grte.png" alt="" data-size="line">](https://training.hacktricks.xyz/courses/grte)
+
+<details>
+
+<summary>Support HackTricks</summary>
+
+* Check the [**subscription plans**](https://github.com/sponsors/carlospolop)!
+* **Join the** 💬 [**Discord group**](https://discord.gg/hRep4RUj7f) or the [**telegram group**](https://t.me/peass) or **follow** us on **Twitter** 🐦 [**@hacktricks\_live**](https://twitter.com/hacktricks\_live)**.**
+* **Share hacking tricks by submitting PRs to the** [**HackTricks**](https://github.com/carlospolop/hacktricks) and [**HackTricks Cloud**](https://github.com/carlospolop/hacktricks-cloud) github repos.
+
+</details>
+{% endhint %}

@@ -1,193 +1,246 @@
 # Stego Tricks
 
-**Some info was taken from** [**https://0xrick.github.io/lists/stego/**](https://0xrick.github.io/lists/stego/) **and from** [**https://github.com/DominicBreuker/stego-toolkit**](https://github.com/DominicBreuker/stego-toolkit)
+{% hint style="success" %}
+Learn & practice AWS Hacking:<img src="/.gitbook/assets/arte.png" alt="" data-size="line">[**HackTricks Training AWS Red Team Expert (ARTE)**](https://training.hacktricks.xyz/courses/arte)<img src="/.gitbook/assets/arte.png" alt="" data-size="line">\
+Learn & practice GCP Hacking: <img src="/.gitbook/assets/grte.png" alt="" data-size="line">[**HackTricks Training GCP Red Team Expert (GRTE)**<img src="/.gitbook/assets/grte.png" alt="" data-size="line">](https://training.hacktricks.xyz/courses/grte)
 
-## Extracting data from all files
+<details>
 
-### Binwalk <a id="binwalk"></a>
+<summary>Support HackTricks</summary>
 
-Binwalk is a tool for searching binary files, like images and audio files, for embedded hidden files and data.  
-It can be installed with `apt`, and the [source](https://github.com/ReFirmLabs/binwalk) can be found on Github.  
-**Useful commands**:  
-`binwalk file` : Displays the embedded data in the given file  
-`binwalk -e file` : Displays and extracts the data from the given file  
-`binwalk --dd ".*" file` : Displays and extracts the data from the given file
+* Check the [**subscription plans**](https://github.com/sponsors/carlospolop)!
+* **Join the** 💬 [**Discord group**](https://discord.gg/hRep4RUj7f) or the [**telegram group**](https://t.me/peass) or **follow** us on **Twitter** 🐦 [**@hacktricks\_live**](https://twitter.com/hacktricks\_live)**.**
+* **Share hacking tricks by submitting PRs to the** [**HackTricks**](https://github.com/carlospolop/hacktricks) and [**HackTricks Cloud**](https://github.com/carlospolop/hacktricks-cloud) github repos.
 
-### Foremost <a id="foremost"></a>
+</details>
+{% endhint %}
 
-Foremost is a program that recovers files based on their headers, footers, and internal data structures. I find it especially useful when dealing with png images. You can select the files that Foremost will extract by changing the config file in **/etc/foremost.conf.**  
-It can be installed with `apt`, and the [source](https://github.com/korczis/foremost) can be found on Github.  
-**Useful commands:**  
-`foremost -i file` : extracts data from the given file.
+## **Extracting Data from Files**
 
-### Exiftool <a id="exiftool"></a>
+### **Binwalk**
 
-Sometimes, important stuff is hidden in the metadata of an image or file; exiftool can be very helpful to view file metadata.  
-You can get it from [here](https://www.sno.phy.queensu.ca/~phil/exiftool/)  
-**Useful commands:**  
-`exiftool file` : shows the metadata of the given file
+A tool for searching binary files for embedded hidden files and data. It's installed via `apt` and its source is available on [GitHub](https://github.com/ReFirmLabs/binwalk).
 
-### Exiv2 <a id="exiv2"></a>
+```bash
+binwalk file # Displays the embedded data
+binwalk -e file # Extracts the data
+binwalk --dd ".*" file # Extracts all data
+```
 
-A tool similar to exiftool.  
-It can be installed with `apt`, and the [source](https://github.com/Exiv2/exiv2) can be found on Github.  
-[Official website](http://www.exiv2.org/)  
-**Useful commands:**  
-`exiv2 file` : shows the metadata of the given file
+### **Foremost**
 
-### File
+Recovers files based on their headers and footers, useful for png images. Installed via `apt` with its source on [GitHub](https://github.com/korczis/foremost).
 
-Check out what kind of file you have
+```bash
+foremost -i file # Extracts data
+```
 
-### Strings
+### **Exiftool**
 
-Extract strings from the file.  
-Useful commands:  
-`strings -n 6 file`: Extract the strings with min length of 6  
-`strings -n 6 file | head -n 20`: Extract first 20 strings with min length of 6  
-`strings -n 6 file | tail -n 20`: Extract last 20 strings with min length of 6  
-`strings -e s -n 6 file`: Extract 7bit strings  
-`strings -e S -n 6 file`: Extract 8bit strings  
-`strings -e l -n 6 file`: Extract 16bit strings \(little-endian\)  
-`strings -e b -n 6 file`: Extract 16bit strings \(big-endian\)  
-`strings -e L -n 6 file`: Extract 32bit strings \(little-endian\)  
-`strings -e B -n 6 file`: Extract 32bit strings \(big-endian\)
+Helps to view file metadata, available [here](https://www.sno.phy.queensu.ca/\~phil/exiftool/).
 
-### cmp - Comparison
+```bash
+exiftool file # Shows the metadata
+```
 
-If you have some **modified** image/audio/video, check if you can **find the exact original one** on the internet, then **compare both** files with:
+### **Exiv2**
 
-```text
+Similar to exiftool, for metadata viewing. Installable via `apt`, source on [GitHub](https://github.com/Exiv2/exiv2), and has an [official website](http://www.exiv2.org/).
+
+```bash
+exiv2 file # Shows the metadata
+```
+
+### **File**
+
+Identify the type of file you're dealing with.
+
+### **Strings**
+
+Extracts readable strings from files, using various encoding settings to filter the output.
+
+```bash
+strings -n 6 file # Extracts strings with a minimum length of 6
+strings -n 6 file | head -n 20 # First 20 strings
+strings -n 6 file | tail -n 20 # Last 20 strings
+strings -e s -n 6 file # 7bit strings
+strings -e S -n 6 file # 8bit strings
+strings -e l -n 6 file # 16bit strings (little-endian)
+strings -e b -n 6 file # 16bit strings (big-endian)
+strings -e L -n 6 file # 32bit strings (little-endian)
+strings -e B -n 6 file # 32bit strings (big-endian)
+```
+
+### **Comparison (cmp)**
+
+Useful for comparing a modified file with its original version found online.
+
+```bash
 cmp original.jpg stego.jpg -b -l
 ```
 
-## Extracting hidden data in text
+## **Extracting Hidden Data in Text**
 
-### Hidden data in spaces
+### **Hidden Data in Spaces**
 
-If you find that a **text line** is **bigger** than it should be, then some **hidden information** could be included inside the **spaces** using invisible characters.󐁈󐁥󐁬󐁬󐁯󐀠󐁴󐁨  
-To **extract** the **data**, you can use: [https://www.irongeek.com/i.php?page=security/unicode-steganography-homoglyph-encoder](https://www.irongeek.com/i.php?page=security/unicode-steganography-homoglyph-encoder)
+Invisible characters in seemingly empty spaces may hide information. To extract this data, visit [https://www.irongeek.com/i.php?page=security/unicode-steganography-homoglyph-encoder](https://www.irongeek.com/i.php?page=security/unicode-steganography-homoglyph-encoder).
 
-## Extracting data from images
+## **Extracting Data from Images**
 
-### identify
+### **Identifying Image Details with GraphicMagick**
 
-[GraphicMagick](https://imagemagick.org/script/download.php) tool to check what kind of image a file is. Also checks if the image is corrupted.
+[GraphicMagick](https://imagemagick.org/script/download.php) serves to determine image file types and identify potential corruption. Execute the command below to inspect an image:
 
-```text
+```bash
 ./magick identify -verbose stego.jpg
 ```
 
-If the image is damaged, you may be able to restore it by simply adding a metadata comment to it \(if it's very badly damaged this won't work\):
+To attempt repair on a damaged image, adding a metadata comment might help:
 
 ```bash
 ./magick mogrify -set comment 'Extraneous bytes removed' stego.jpg
 ```
 
-### Steghide \[JPEG, BMP, WAV, AU\] <a id="steghide"></a>
+### **Steghide for Data Concealment**
 
-Steghide is a steganography program that hides data in various kinds of image and audio files. It supports the following file formats : `JPEG, BMP, WAV and AU`. It’s also useful for extracting embedded and encrypted data from other files.  
-It can be installed with `apt`, and the [source](https://github.com/StefanoDeVuono/steghide) can be found on Github.  
-**Useful commands:**  
-`steghide info file` : displays info about whether a file has embedded data or not.  
-`steghide extract -sf file [--passphrase password]` : extracts embedded data from a file \[using a password\]
+Steghide facilitates hiding data within `JPEG, BMP, WAV, and AU` files, capable of embedding and extracting encrypted data. Installation is straightforward using `apt`, and its [source code is available on GitHub](https://github.com/StefanoDeVuono/steghide).
 
-You can also extract content from steghide using the web: [https://futureboy.us/stegano/decinput.html](https://futureboy.us/stegano/decinput.html)
+**Commands:**
 
-**Bruteforcing** Steghide: [stegcracker](https://github.com/Paradoxis/StegCracker.git) `stegcracker <file> [<wordlist>]`
+* `steghide info file` reveals if a file contains hidden data.
+* `steghide extract -sf file [--passphrase password]` extracts the hidden data, password optional.
 
-### Zsteg \[PNG, BMP\] <a id="zsteg"></a>
+For web-based extraction, visit [this website](https://futureboy.us/stegano/decinput.html).
 
-zsteg is a tool that can detect hidden data in png and bmp files.  
-To install it : `gem install zsteg`. The source can also be found on [Github](https://github.com/zed-0xff/zsteg)  
-**Useful commands:**  
-`zsteg -a file` : Runs every detection method on the given file  
-`zsteg -E file` : Extracts data with the given payload \(example : zsteg -E b4,bgr,msb,xy name.png\)
+**Bruteforce Attack with Stegcracker:**
 
-### stegoVeritas JPG, PNG, GIF, TIFF, BMP
+* To attempt password cracking on Steghide, use [stegcracker](https://github.com/Paradoxis/StegCracker.git) as follows:
 
-Capable of a wide variety of simple and advanced tricks, this tool can check file metadata, create transformed images, brute force LSB, and more. Check out `stegoveritas.py -h` to read about its full capabilities. Execute `stegoveritas.py stego.jpg` to run all checks.
+```bash
+stegcracker <file> [<wordlist>]
+```
 
-### Stegsolve
+### **zsteg for PNG and BMP Files**
 
-Sometimes there is a message or a text hidden in the image itself that, in order to view it, must have color filters applied, or some color levels changed. Although you can do that with something like GIMP or Photoshop, Stegsolve makes it easier. It's a small Java tool that applies many useful color filters on images; In CTF challenges, Stegsolve is often a real timesaver.  
-You can get it from [Github](https://github.com/eugenekolo/sec-tools/tree/master/stego/stegsolve/stegsolve)  
-To use it, just open the image and click on the `<` `>` buttons.
+zsteg specializes in uncovering hidden data in PNG and BMP files. Installation is done via `gem install zsteg`, with its [source on GitHub](https://github.com/zed-0xff/zsteg).
 
-### FFT
+**Commands:**
 
-To find hidden content using Fast Fourier T:
+* `zsteg -a file` applies all detection methods on a file.
+* `zsteg -E file` specifies a payload for data extraction.
 
-* [http://bigwww.epfl.ch/demo/ip/demos/FFT/](http://bigwww.epfl.ch/demo/ip/demos/FFT/)
-* [https://www.ejectamenta.com/Fourifier-fullscreen/](https://www.ejectamenta.com/Fourifier-fullscreen/)
-* [https://github.com/0xcomposure/FFTStegPic](https://github.com/0xcomposure/FFTStegPic) 
-* `pip3 install opencv-python`
+### **StegoVeritas and Stegsolve**
 
-### Stegpy \[PNG, BMP, GIF, WebP, WAV\]
+**stegoVeritas** checks metadata, performs image transformations, and applies LSB brute forcing among other features. Use `stegoveritas.py -h` for a full list of options and `stegoveritas.py stego.jpg` to execute all checks.
 
-A program for encoding information in image and audio files through steganography. It can store the data as either plaintext or encrypted.  
-Find it on [Github](https://github.com/dhsdshdhk/stegpy).
+**Stegsolve** applies various color filters to reveal hidden texts or messages within images. It's available on [GitHub](https://github.com/eugenekolo/sec-tools/tree/master/stego/stegsolve/stegsolve).
 
-### Pngcheck
+### **FFT for Hidden Content Detection**
 
-Get details on a PNG file \(or even find out it's actually something else!\).  
-`apt-get install pngcheck`: Install the tool  
-`pngcheck stego.png` : Obtain info about the PNG
+Fast Fourier Transform (FFT) techniques can unveil concealed content in images. Useful resources include:
 
-### Some other image tools worth mentioning
+* [EPFL Demo](http://bigwww.epfl.ch/demo/ip/demos/FFT/)
+* [Ejectamenta](https://www.ejectamenta.com/Fourifier-fullscreen/)
+* [FFTStegPic on GitHub](https://github.com/0xcomposure/FFTStegPic)
 
-* [http://magiceye.ecksdee.co.uk/](http://magiceye.ecksdee.co.uk/)
-* [https://29a.ch/sandbox/2012/imageerrorlevelanalysis/](https://29a.ch/sandbox/2012/imageerrorlevelanalysis/)
+### **Stegpy for Audio and Image Files**
 
-## Extracting data from audios
+Stegpy allows embedding information into image and audio files, supporting formats like PNG, BMP, GIF, WebP, and WAV. It's available on [GitHub](https://github.com/dhsdshdhk/stegpy).
 
-### [Steghide \[JPEG, BMP, WAV, AU\]](stego-tricks.md#steghide) <a id="steghide"></a>
+### **Pngcheck for PNG File Analysis**
 
-### [Stegpy \[PNG, BMP, GIF, WebP, WAV\]](stego-tricks.md#stegpy-png-bmp-gif-webp-wav)
+To analyze PNG files or to validate their authenticity, use:
 
-### ffmpeg
+```bash
+apt-get install pngcheck
+pngcheck stego.png
+```
 
-ffmpeg can be used to check the integrity of audio files, reporting various information about the file, as well as any errors it finds.  
-`ffmpeg -v info -i stego.mp3 -f null -`
+### **Additional Tools for Image Analysis**
 
-### Wavsteg \[WAV\] <a id="wavsteg"></a>
+For further exploration, consider visiting:
 
-WavSteg is a Python3 tool that can hide data, using least significant bit, in wav files. It can also search for, and extract, data from wav files.  
-You can get it from [Github](https://github.com/ragibson/Steganography#WavSteg)  
-Useful commands:  
-`python3 WavSteg.py -r -b 1 -s soundfile -o outputfile` : Extracts to an output file \(taking only 1 lsb\)  
-`python3 WavSteg.py -r -b 2 -s soundfile -o outputfile` : Extracts to an output file \(taking only 2 lsb\)
+* [Magic Eye Solver](http://magiceye.ecksdee.co.uk/)
+* [Image Error Level Analysis](https://29a.ch/sandbox/2012/imageerrorlevelanalysis/)
+* [Outguess](https://github.com/resurrecting-open-source-projects/outguess)
+* [OpenStego](https://www.openstego.com/)
+* [DIIT](https://diit.sourceforge.net/)
 
-### Deepsound
+## **Extracting Data from Audios**
 
-Hide, and check for, information encrypted with AES-265 in sound files. Download from [the oficial page](http://jpinsoft.net/deepsound/download.aspx).  
-To search for hidden info, simply run the program and open the sound file. If DeepSound finds any data hidden, you'll need to provide the password to unlock it.
+**Audio steganography** offers a unique method to conceal information within sound files. Different tools are utilized for embedding or retrieving hidden content.
 
-### Sonic visualizer <a id="sonic-visualizer"></a>
+### **Steghide (JPEG, BMP, WAV, AU)**
 
-Sonic visualizer is a tool for viewing and analyzing the contents of audio files. It can be very helpful when facing audio steganography challenges; you can reveal hidden shapes in audio files that many other tools won't detect.  
-If you're stuck, always check the spectrogram of the audio. [Offical Website](https://www.sonicvisualiser.org/)
+Steghide is a versatile tool designed for hiding data in JPEG, BMP, WAV, and AU files. Detailed instructions are provided in the [stego tricks documentation](stego-tricks.md#steghide).
 
-### DTMF Tones - Dial tones
+### **Stegpy (PNG, BMP, GIF, WebP, WAV)**
 
-* [https://unframework.github.io/dtmf-detect/](https://unframework.github.io/dtmf-detect/)
-* [http://dialabc.com/sound/detect/index.html](http://dialabc.com/sound/detect/index.html)
+This tool is compatible with a variety of formats including PNG, BMP, GIF, WebP, and WAV. For more information, refer to [Stegpy's section](stego-tricks.md#stegpy-png-bmp-gif-webp-wav).
 
-## Other tricks
+### **ffmpeg**
 
-### Binary length SQRT - QR Code
+ffmpeg is crucial for assessing the integrity of audio files, highlighting detailed information and pinpointing any discrepancies.
 
-If you receive binary data with an SQRT length of an entire number, it could be some kind of QR code:
+```bash
+ffmpeg -v info -i stego.mp3 -f null -
+```
 
-```text
+### **WavSteg (WAV)**
+
+WavSteg excels in concealing and extracting data within WAV files using the least significant bit strategy. It is accessible on [GitHub](https://github.com/ragibson/Steganography#WavSteg). Commands include:
+
+```bash
+python3 WavSteg.py -r -b 1 -s soundfile -o outputfile
+
+python3 WavSteg.py -r -b 2 -s soundfile -o outputfile
+```
+
+### **Deepsound**
+
+Deepsound allows for the encryption and detection of information within sound files using AES-256. It can be downloaded from [the official page](http://jpinsoft.net/deepsound/download.aspx).
+
+### **Sonic Visualizer**
+
+An invaluable tool for visual and analytical inspection of audio files, Sonic Visualizer can unveil hidden elements undetectable by other means. Visit the [official website](https://www.sonicvisualiser.org/) for more.
+
+### **DTMF Tones - Dial Tones**
+
+Detecting DTMF tones in audio files can be achieved through online tools such as [this DTMF detector](https://unframework.github.io/dtmf-detect/) and [DialABC](http://dialabc.com/sound/detect/index.html).
+
+## **Other Techniques**
+
+### **Binary Length SQRT - QR Code**
+
+Binary data that squares to a whole number might represent a QR code. Use this snippet to check:
+
+```python
 import math
 math.sqrt(2500) #50
 ```
 
-To convert binary "1"s and "0"s to a proper image: [ https://www.dcode.fr/binary-image](https://github.com/carlospolop/hacktricks/tree/32fa51552498a17d266ff03e62dfd1e2a61dcd10/binary-image/README.md)  
-To read a QR code: [https://online-barcode-reader.inliteresearch.com/](https://online-barcode-reader.inliteresearch.com/)
+For binary to image conversion, check [dcode](https://www.dcode.fr/binary-image). To read QR codes, use [this online barcode reader](https://online-barcode-reader.inliteresearch.com/).
 
-### Braile
+### **Braille Translation**
 
-[https://www.branah.com/braille-translator](https://www.branah.com/braille-translator%29)
+For translating Braille, the [Branah Braille Translator](https://www.branah.com/braille-translator) is an excellent resource.
 
+## **References**
+
+* [**https://0xrick.github.io/lists/stego/**](https://0xrick.github.io/lists/stego/)
+* [**https://github.com/DominicBreuker/stego-toolkit**](https://github.com/DominicBreuker/stego-toolkit)
+
+{% hint style="success" %}
+Learn & practice AWS Hacking:<img src="/.gitbook/assets/arte.png" alt="" data-size="line">[**HackTricks Training AWS Red Team Expert (ARTE)**](https://training.hacktricks.xyz/courses/arte)<img src="/.gitbook/assets/arte.png" alt="" data-size="line">\
+Learn & practice GCP Hacking: <img src="/.gitbook/assets/grte.png" alt="" data-size="line">[**HackTricks Training GCP Red Team Expert (GRTE)**<img src="/.gitbook/assets/grte.png" alt="" data-size="line">](https://training.hacktricks.xyz/courses/grte)
+
+<details>
+
+<summary>Support HackTricks</summary>
+
+* Check the [**subscription plans**](https://github.com/sponsors/carlospolop)!
+* **Join the** 💬 [**Discord group**](https://discord.gg/hRep4RUj7f) or the [**telegram group**](https://t.me/peass) or **follow** us on **Twitter** 🐦 [**@hacktricks\_live**](https://twitter.com/hacktricks\_live)**.**
+* **Share hacking tricks by submitting PRs to the** [**HackTricks**](https://github.com/carlospolop/hacktricks) and [**HackTricks Cloud**](https://github.com/carlospolop/hacktricks-cloud) github repos.
+
+</details>
+{% endhint %}
