@@ -90,6 +90,10 @@ Recent WhatsApp builds also expose `Settings -> Privacy -> Advanced -> Block unk
 * RTT distributions differ by platform and environment because OS, model, client, and network conditions affect timing. Cluster RTTs (e.g., k-means on median/variance features) to label “Android handset", “iOS handset", “Electron desktop", etc.
 * Because the sender must retrieve the recipient’s key inventory before encrypting, the attacker can also watch when new devices are paired; a sudden increase in device count or new RTT cluster is a strong indicator.<sup>[[1]](#references)</sup>
 
+**Fingerprint from queued receipts:** Send several probes with distinct message IDs while the target device is offline. When it reconnects, correlate the IDs in the returned delivery receipts and check whether they are separate or stacked in one receipt, and whether stacked IDs retain or reverse send order. In the tested clients, WhatsApp Android/iOS returned separate delivery receipts, while Web, Windows and macOS stacked them; macOS reversed the stacked order. Signal Desktop stacked receipts, unlike its mobile clients. This can classify a reconnecting client even when RTT distributions overlap. Do not confuse delivery receipts with read receipts, whose stacking rules differ.<sup>[[1]](#references)</sup>
+
+For a separate WhatsApp probe that reads **server-side prekey refills** without delivering messages, see [Prekey Bundle Depletion and Refill Side Channel](whatsapp-prekey-bundle-side-channel.md).
+
 ## Sampling cadence, queueing, and stacked receipts
 
 * **WhatsApp burst tolerance:** Published measurements reported that WhatsApp accepted silent-reaction bursts as fast as one probe every `50 ms` without obvious server-side queueing. That is useful for short calibration bursts, fast device counting, or quickly ramping a drain attack.
@@ -125,6 +129,8 @@ Because every silent probe must be decrypted and acknowledged, continuously send
 * Oversized reactions stop producing reliable delivery receipts once the body grows beyond roughly `30 bytes`, but they are still forwarded and processed before discard. Keep reaction bodies tiny when you need ACKs; inflate them only when the goal is pure drain or covert one-way transport.
 * Public measurements reached about `3.7 MB/s` (`~13.3 GB/h`) of victim traffic in this mode.
 
+
+
 ## References
 
 - [1] [Careless Whisper: Exploiting Silent Delivery Receipts to Monitor Users on Mobile Instant Messengers](https://arxiv.org/html/2411.11194v4)
@@ -138,5 +144,4 @@ Because every silent probe must be decrypted and acknowledged, continuously send
 - [9] [careless-whisper-python](https://github.com/ctrlsam/careless-whisper-python)
 - [10] [How to block high volumes of unknown messages | WhatsApp Help Center](https://faq.whatsapp.com/3379690015658337)
 - [11] [All the Numbers are US: Large-scale Abuse of Contact Discovery in Mobile Messengers](https://www.ndss-symposium.org/ndss-paper/all-the-numbers-are-us-large-scale-abuse-of-contact-discovery-in-mobile-messengers/)
-
 {{#include ../banners/hacktricks-training.md}}
