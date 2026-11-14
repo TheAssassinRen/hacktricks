@@ -40,7 +40,7 @@ jscd disasm app.jsc > app.jsc.disasm.txt
 
 `jscd disasm` emits a View8-compatible listing, so the View8 command above can use that output instead of `v8dasm` when the cache is supported. Inspect strings alongside the function tree to locate decoder calls and likely entry points; do not treat `jscd`'s approximate JavaScript output as the original source. If the tool rejects the version or leaves read-only-heap placeholders, return to a matching V8 build or supply a name map from the same build rather than guessing property names.<sup>[[4]](#references)</sup>
 
-For a cache inside an Electron application, first [extract the ASAR and inspect its main and preload entry points](../../network-services-pentesting/pentesting-web/electron-desktop-apps/). Electron and Node caches can differ in snapshot and pointer-compression layout even when their V8 version strings match.<sup>[[4]](#references)</sup>
+For a cache inside an Electron application, first [extract the ASAR and inspect its main and preload entry points](../../desktop-application-security/electron-desktop-apps/). Electron and Node caches can differ in snapshot and pointer-compression layout even when their V8 version strings match.<sup>[[4]](#references)</sup>
 
 ### Read View8 pseudocode as an IR
 

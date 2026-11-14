@@ -1,6 +1,6 @@
 # Electron contextIsolation RCE via IPC
 
-{{#include ../../../banners/hacktricks-training.md}}
+{{#include ../../banners/hacktricks-training.md}}
 
 Context isolation does not make an unsafe preload bridge safe. If a preload exposes privileged IPC to renderer content, an XSS or compromised renderer can call that bridge; RCE then depends on the validation and capabilities of the corresponding main-process handler. Electron recommends exposing one narrow method per operation, validating IPC senders, and never exposing raw IPC primitives.<sup>[[3]](#references)[[4]](#references)</sup>
 
@@ -10,7 +10,7 @@ Context isolation does not make an unsafe preload bridge safe. If a preload expo
 
 Example from [https://speakerdeck.com/masatokinugawa/how-i-hacked-microsoft-teams-and-got-150000-dollars-in-pwn2own?slide=21](https://speakerdeck.com/masatokinugawa/how-i-hacked-microsoft-teams-and-got-150000-dollars-in-pwn2own?slide=21) (you have the full example of how MS Teams was abusing from XSS to RCE in those slides, this is just a very basic example):<sup>[[2]](#references)</sup>
 
-<figure><img src="../../../images/image (9) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../images/image (9) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Example 1
 
@@ -112,4 +112,4 @@ window.electronSend = (event, data) => {
 - [3] [Electron — Security checklist](https://www.electronjs.org/docs/latest/tutorial/security)
 - [4] [Electron — Context isolation and safe API exposure](https://www.electronjs.org/docs/latest/tutorial/context-isolation)
 
-{{#include ../../../banners/hacktricks-training.md}}
+{{#include ../../banners/hacktricks-training.md}}

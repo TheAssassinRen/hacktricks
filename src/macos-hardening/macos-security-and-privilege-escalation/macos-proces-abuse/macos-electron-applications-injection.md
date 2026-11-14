@@ -4,8 +4,10 @@
 
 ## Basic Information
 
-If you don't know what Electron is you can find [**lots of information here**](https://book.hacktricks.wiki/en/network-services-pentesting/pentesting-web/electron-desktop-apps/index.html#rce-xss--contextisolation). But for now just know that Electron runs **node**.\
+If you don't know what Electron is you can find [**lots of information here**](https://book.hacktricks.wiki/en/desktop-application-security/electron-desktop-apps/index.html#rce-xss--contextisolation). But for now just know that Electron runs **node**.\
 And node has some **parameters** and **env variables** that can be use to **make it execute other code** apart from the indicated file.
+
+For the cross-platform local-write prerequisite and ASAR/V8 snapshot paths, see [Electron local code injection and snapshot tampering](../../../desktop-application-security/electron-desktop-apps/electron-local-code-injection-and-snapshot-tampering.md).
 
 ### Electron Fuses
 

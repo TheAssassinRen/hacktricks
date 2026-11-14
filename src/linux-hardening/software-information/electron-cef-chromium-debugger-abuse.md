@@ -115,7 +115,7 @@ The tool [**https://github.com/taviso/cefdebug**](https://github.com/taviso/cefd
 ## RCE in NodeJS Debugger/Inspector
 
 > [!TIP]
-> If you came here looking how to get [**RCE from a XSS in Electron please check this page.**](../../network-services-pentesting/pentesting-web/electron-desktop-apps/index.html)
+> If you came here looking how to get [**RCE from a XSS in Electron please check this page.**](../../desktop-application-security/electron-desktop-apps/index.html)
 
 Some common ways to obtain **RCE** when you can **connect** to a Node **inspector** is using something like (looks that this **won't work in a connection to Chrome DevTools protocol**):<sup>[[2]](#references)</sup>
 

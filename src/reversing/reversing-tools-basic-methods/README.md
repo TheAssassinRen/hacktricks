@@ -243,7 +243,7 @@ rea function /absolute/path/to/program 0x1000 --provider ghidra --json
 
 Start from a feature string or symbol, follow references and callers, then inspect the selected function dossier and pseudocode with `rea decompile`. REA binds a session to the selected provider rather than silently replacing it after a failure. For repeatable queries, `--snapshot PATH` reuses only matching artifact bytes, provider, settings, operation and parameters; a snapshot is a local cache, not a saved provider database. Preserve the returned Evidence and explicit unknowns instead of treating inferred paths or decompiler text as original source.<sup>[[16]](#references)[[18]](#references)</sup>
 
-For JavaScript/Electron entry points leading into native add-ons, see [Electron Desktop Apps](../../network-services-pentesting/pentesting-web/electron-desktop-apps/#static-asar-to-native-boundary-tracing-with-rea).
+For JavaScript/Electron entry points leading into native add-ons, see [Electron Desktop Apps](../../desktop-application-security/electron-desktop-apps/#static-asar-to-native-boundary-tracing-with-rea).
 
 ## Scripted IDA and Ghidra analysis with a local TCP bridge
 

@@ -1,6 +1,6 @@
 # Electron contextIsolation RCE via preload code
 
-{{#include ../../../banners/hacktricks-training.md}}
+{{#include ../../banners/hacktricks-training.md}}
 
 These are **historical chains** in which preload code shared JavaScript intrinsics or privileged APIs with attacker-controlled renderer content. With context isolation enabled, preload and page normally have separate JavaScript realms, so prototype overrides in the page do not automatically affect preload objects. Validate the chain against the exact Electron/application version and bridge implementation.<sup>[[3]](#references)</sup>
 
@@ -10,7 +10,7 @@ Example from [https://speakerdeck.com/masatokinugawa/electron-abusing-the-lack-o
 
 This code open http(s) links with default browser:
 
-![Electron contextIsolation RCE via preload code - Example 1: This code open http(s) links with default browser](<../../../images/image (768).png>)
+![Electron contextIsolation RCE via preload code - Example 1: This code open http(s) links with default browser](<../../images/image (768).png>)
 
 In the affected historical application, a local-file navigation such as `file:///C:/Windows/System32/calc.exe` could reach an OS launch path; `SAFE_PROTOCOLS.indexOf` was intended to prevent it.
 
@@ -92,4 +92,4 @@ Specifically, the argument is replaced by influencing the command-resolution and
 - [3] [Electron — Context isolation](https://www.electronjs.org/docs/latest/tutorial/context-isolation)
 - [4] [`node-cross-spawn` parser revision and exact paths used by the chain (lines 36–55)](https://github.com/moxystudio/node-cross-spawn/blob/16feb534e818668594fd530b113a028c0c06bddc/lib/parse.js#L36-L55)
 
-{{#include ../../../banners/hacktricks-training.md}}
+{{#include ../../banners/hacktricks-training.md}}
