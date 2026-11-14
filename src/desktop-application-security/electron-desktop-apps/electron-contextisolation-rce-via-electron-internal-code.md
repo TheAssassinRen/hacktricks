@@ -1,6 +1,6 @@
 # Electron context-isolation RCE via internal code
 
-{{#include ../../../banners/hacktricks-training.md}}
+{{#include ../../banners/hacktricks-training.md}}
 
 These are **historical exploitation patterns** for Electron applications that ran untrusted renderer content without context isolation. Context isolation has been enabled by default since Electron 12 and remains a recommended security setting.<sup>[[1]](#references)</sup> Exact internals differ by Electron and Node.js version, so reproduce a chain against the target application's bundled versions.
 
@@ -19,15 +19,15 @@ process.on("exit", function () {
 })
 ```
 
-![Electron asar.js internal code path used in the contextIsolation RCE example](<../../../images/image (1070).png>)
+![Electron asar.js internal code path used in the contextIsolation RCE example](<../../images/image (1070).png>)
 
 The listener was dispatched through Node.js's event machinery. The original page linked a stale `bin/events.js` path; the same historical commit's live source is under `lib/events.js`.<sup>[[5]](#references)</sup>
 
-![Node events.js code path reached by the Electron contextIsolation RCE chain](<../../../images/image (793).png>)
+![Node events.js code path reached by the Electron contextIsolation RCE chain](<../../images/image (793).png>)
 
 In this path, `self` is Node.js's process object:
 
-![Electron contextIsolation RCE via Electron internal code - Example 1: Where "self" is Node's process object](<../../../images/image (700).png>)
+![Electron contextIsolation RCE via Electron internal code - Example 1: Where "self" is Node's process object](<../../images/image (700).png>)
 
 The historical process object exposed a path to `require`:
 
@@ -52,11 +52,11 @@ The ElectroVolt presentation demonstrates another historical chain that obtains 
 
 Leak:
 
-<figure><img src="../../../images/image (279).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../images/image (279).png" alt=""><figcaption></figcaption></figure>
 
 Exploit:
 
-<figure><img src="../../../images/image (89).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../images/image (89).png" alt=""><figcaption></figcaption></figure>
 
 ## References
 
@@ -66,4 +66,4 @@ Exploit:
 - [4] [ElectroVolt: Pwning Popular Desktop Apps While Uncovering New Attack Surface on Electron](https://www.youtube.com/watch?v=Tzo8ucHA5xw&list=PLH15HpR5qRsVKcKwvIl-AzGfRqKyx--zq&index=81)
 - [5] [Node.js historical source - `lib/events.js` listener dispatch](https://github.com/nodejs/node/blob/8a44289089a08b7b19fa3c4651b5f1f5d1edd71b/lib/events.js#L156-L231)
 
-{{#include ../../../banners/hacktricks-training.md}}
+{{#include ../../banners/hacktricks-training.md}}
